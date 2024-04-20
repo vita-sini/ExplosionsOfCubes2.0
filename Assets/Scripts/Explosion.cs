@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private float _explosionRadius = 40;
-    private float _explosionForce = 700;
-    private float _explosionForceEffort = 2;
-    private float _explosionRadiusEffort = 2;
+    private float _radius = 40;
+    private float _force = 700;
+    private float _forceEffort = 2;
+    private float _radiusEffort = 2;
 
-    public void Blasting()
+    public void Blast()
     {
-        _explosionRadius *= _explosionForceEffort;
-        _explosionForce *= _explosionRadiusEffort;
+        _radius *= _forceEffort;
+        _force *= _radiusEffort;
 
         foreach (Rigidbody explodableObject in GetExplodableObjects())
-            explodableObject.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+            explodableObject.AddExplosionForce(_force, transform.position, _radius);
     }
 
     private IEnumerable<Rigidbody> GetExplodableObjects()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _radius);
 
         List<Rigidbody> objects = new();
 
